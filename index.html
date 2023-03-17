@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        var countryobj = {
+            "India" : {
+                "Uttar-Pradesh": ["Lucknow", "Kanpur", "Varanasi", "Noida"],
+                "Maharastra": ["Mumbai", "Nagpur", "Pune"],
+                "Rajasthan": ["Jaipur", "Ajmer", "Udaipur", "Jaisalmer", "Jodhpur"],
+                "Madhya-Pradesh": ["Indore", "Gwalior", "Bhopal", "Guna"]
+            },
+            "United States" : {
+                "Texas": ["Houston", "San Antonio", "Dallas", "Austin"],
+                "California": ["Los Angeles", "San Diego", "San Jose", "San Fransico"],
+                "Nevada": ["Las Vegas", "Henderson", "Spring VAlley", "Carson City"]
+            }
+        }
+
+        window.onload = function() {
+            var countrysel = document.getElementById("country");
+            var statesel = document.getElementById("state");
+            var citysel = document.getElementById("city");
+
+            for(var x in countryobj){
+                countrysel.options[countrysel.options.length] = new Option(x, x);
+            }
+            countrysel.onchange = function() {
+                statesel.length = 1;
+                citysel.length = 1;
+                for(var y in countryobj[this.value]){
+                    statesel.options[statesel.options.length] = new Option(y, y);
+                }
+            }
+            statesel.onchange = function() {
+                citysel.length = 1;
+                var z = countryobj[countrysel.value][this.value];
+                for(var i=0; i<z.length; i++){
+                    citysel.options[citysel.options.length] = new Option(z[i], z[i]);
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text],
+        input[type=password],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: orange;
+            outline: none;
+        }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .registerbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/" method="post">
+        <div class="container">
+            
+                <h1>Registeration Form</h1>
+            
+            <hr>
+            <label> Firstname </label>
+            <input type="text" name="firstname" id="firstname" placeholder="Firstname" size="15" required />
+            <label> Lastname: </label>
+            <input type="text" name="lastname" id="lastname" placeholder="Lastname" size="15" required />
+            <label> E-Mail </label>
+            <input type="text" name="email" id="email" placeholder="E-mail" size="15" required />
+            <div>
+                <label>
+                    Country:
+                </label>
+
+                <select name="country" id="country"> 
+                    <option value="" selected="selected">Select Country</option>
+                </select>
+                <label>
+                    State:
+                </label>
+
+                <select name="state" id="state"> 
+                    <option value="" selected="selected">Select State</option>
+                </select>
+                <label>
+                    City:
+                </label>
+
+                <select name="city" id="city"> 
+                    <option value="" selected="selected">Select City</option>
+                </select>
+            </div>
+            <div>
+                <label>
+                    Gender :
+                </label><br>
+                <input type="radio" value="Male" name="gender" checked> Male
+                <input type="radio" value="Female" name="gender"> Female
+                <input type="radio" value="Other" name="gender"> Other
+
+            </div>
+
+            <label> Age </label>
+            <input type="number" name="age" id="age" placeholder="age" size="15" required />
+
+            <button type="submit" id="button">Save</button>
+            <button type="submit" id="displayButton">Display</button>
+            
+        </div>
+    </form>
+    <script src="registeration.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>  
+</body>  
+        
+          
